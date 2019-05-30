@@ -52,6 +52,17 @@ def add_addtional_columns(dataframe_needing_cols, list_of_cols):
     )
     return datafame_with_cols_added
 
+def add_additional_rows(dataframe_needing_rows, list_of_rows):
+    """
+
+    :param dataframe_needing_rows: pd.DataFrame; DataFrame needing rows added
+    :param list_of_rows: list(); List of the rows to be added
+    :return: dataframe_with_rows_added; pd.DataFrame
+    """
+    cols = list(df.columns.values)
+    dataframe_with_rows_added = df.append(pd.DataFrame(additional_rows, columns=cols))
+    return dataframe_with_rows_added
+
 def subset_of_df(df, row_names=None, col_names=None):
     """
     
@@ -81,28 +92,6 @@ def apply_function(df, function, row_or_col=None, rows_or_cols=None):
         return df
     else:
         return "Invalid: Select row or col"
-
-#####
-
-"""
-df = pd.read_csv("grades.csv")
-
-aggregation = {
-    "grades" : {. # Which column to work on
-        "highest gread" : "max" # We give a name to the aggregate column and what function we want applied there
-    }
-}
-
-# Add our where, groupby and aggregation
-newdf = df[df["last_name"] == "Guo"].groupby("month").agg(aggregation)
-
-# We ravel() to join the newly named column with the aggregation function for readability
-newdf.columns = ["_".join(col) for col in newdf.columns.ravel()]
-
-# We reset it to make it look pretty like Manda
-newdf.reset_index()
+    
 
 
-Find column and row and assign it
-t.loc[(t["ID"] == 1938), "BATCHID"] = [1,2,3,4]
-"""
