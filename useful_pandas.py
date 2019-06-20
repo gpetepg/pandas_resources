@@ -13,6 +13,34 @@ import numpy as np
 # pd.set_option('display.max_columns', 500)
 # pd.set_option('display.width', 1000)
 
+def insert_df_to_db(df, db_uri, table_name, exist_option=None, echo=False):
+    """Insert pandas.DataFrame data via pandas.DataFrame.to_sql and SQLAlchemy engine.
+
+    :param db_uri: str; SQLAlchemy formatted host string
+    :param df: pandas.DataFrame; DataFrame to insert
+    :param exist_option: str; set option is table exists
+
+    exist options:
+    replace: Drop the table before inserting new values.
+    append: Insert new values to the existing table.
+    """
+
+    engine = create_engine(
+        db_uri,
+        echo=echo,  # Set True to see raw SQL
+    )
+
+    conn = engine.connect()
+
+    df.to_sql(
+        name=table_name,
+        con=engine,
+        index=False,
+        if_exists=exist_option,
+    )
+
+    conn.close()
+
 def create_table_from_metadata(table_name, db_uri, echo=False):
     """
     
