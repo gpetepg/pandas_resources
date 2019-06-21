@@ -14,6 +14,6 @@ YouTube Channels:
 Continued Education Websites:
  - https://www.datacamp.com/home
  
- Packages:
+Packages:
  - https://github.com/pandas-profiling/pandas-profiling
  - https://github.com/quantopian/qgrid
